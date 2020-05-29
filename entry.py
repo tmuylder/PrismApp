@@ -1,22 +1,34 @@
 from tkinter import *
+from  tkinter import filedialog
 
 # First the root widget which is basically the box
 root = Tk()
 
-i = Entry(root, width=50, borderwidth=3)
-i.pack()
+
+# Three inputs for the function
+
+# Find Excel file
+def open_excel_file():
+    global my_file
+    root.filename = filedialog.askopenfilename(title="Select a file", filetypes=(("excel file","*.xlsx"),("all files","*.*")))
+    print("Opened the following file: ")
+    myInputSheet = Label(root, text=root.filename).pack()
+#i = Entry(root, width=50, borderwidth=3)
+
+fileButton = Button(root, text="Select a file", command=open_excel_file).pack()
+
 
 v = Entry(root, width=50, borderwidth=3)
 v.pack()
 
 o = Entry(root, width=50, borderwidth=3)
-o.pack()
+print("Variable: {}".format(o.pack()))
 
 def myClick():
-    myInputSheet = i.get()
+    #myInputSheet = i.get()   # Uncomment if you're using an Entry for the inputsheet
     myVariable = v.get()
     myOutputName = o.get()
-    Success = Label(root, text="Transformed Excel sheet: " + myInputSheet + ".\nExtracted the variable: " + myVariable + ".\nNew format in: " + myOutputName + ".xlsx")
+    Success = Label(root, text="Transformed Excel sheet: " + root.filename + ".\nExtracted the variable: " + myVariable + ".\nNew format in: " + myOutputName + ".xlsx")
     Success.pack()
 
 
