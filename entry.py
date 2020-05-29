@@ -1,5 +1,6 @@
 from tkinter import *
 from  tkinter import filedialog
+from functions import *
 
 # First the root widget which is basically the box
 root = Tk()
@@ -9,7 +10,7 @@ root.configure(background='pink')
 # First define a new widget 
 myTitle = Label(root, text = "Prism Reformatter", font=("Open Sans", 18))
 # Secondly pack the widget and put it in the root widget
-myTitle.grid(row=0, column=0)
+myTitle.grid(row=0)
 
 #################################
 # Three inputs for the function #
@@ -18,10 +19,13 @@ myTitle.grid(row=0, column=0)
 # Find Excel file
 def open_excel_file():
     root.filename = filedialog.askopenfilename(title="Select a file", filetypes=(("excel file","*.xlsx"),("all files","*.*")))
+    fileButtonText = Label(root, text=(root.filename))
+    fileButtonText.grid(row=1, column=1)
 
 # Display the button to select a file    
 fileButton = Button(root, text="Select a file", command=open_excel_file)
 fileButton.grid(row=1, column=0)
+
 
 # Box for the variable
 variableText = Label(root, text="Type the name of the variable: ")
@@ -36,15 +40,22 @@ o = Entry(root, width=50, borderwidth=3)
 o.grid(row=3, column=1)
 
 
+#####################
+# Call the function #
+#####################
+
 def myClick():
-    #myInputSheet = i.get()   # Uncomment if you're using an Entry for the inputsheet
+    myInputSheet = root.filename
     myVariable = v.get()
     myOutputName = o.get()
-    Success = Label(root, text="Transformed Excel sheet: " + root.filename + ".\nExtracted the variable: " + myVariable + ".\nNew format in: " + myOutputName + ".xlsx")
-    Success.grid(row=5, column=0)
+
+    plant_data_prism(myInputSheet, myVariable, myOutputName)
+
+    Success = Label(root, text="Transformed Excel sheet: " + root.filename + ".\nExtracted the variable: " + myVariable + ".\nNew format in: " + myOutputName + ".xlsx\n Done...")
+    Success.grid(row=5)
 
 # Convert button
 myButton = Button(root, text = "Convert", padx=50, command=myClick)
-myButton.grid(row=4, column=0)
+myButton.grid(row=4)
 
 root.mainloop()
