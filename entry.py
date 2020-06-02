@@ -4,11 +4,14 @@ from functions import *
 
 # First the root widget which is basically the box
 root = Tk()
-root.configure(background='pink')
+root.configure(background='white')
 
+# Set app width and height
+canvas = Canvas(root, height=500, width=550)
+canvas.grid()
 
 # First define a new widget 
-myTitle = Label(root, text = "Prism Reformatter", font=("Open Sans", 18))
+myTitle = Label(root, text = "Prism Reformatter", font=("Open Sans", 18), bg='white')
 # Secondly pack the widget and put it in the root widget
 myTitle.grid(row=0)
 
